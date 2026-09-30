@@ -1,0 +1,425 @@
+<div class="auth-page">
+  <!-- Left Panel -->
+  <div class="auth-left">
+    <div class="auth-left-content">
+      <button class="back-btn" id="auth-back-btn" (click)="goToLanding()">← Back to Home</button>
+      <div class="brand-logo">🛡️</div>
+      <h2 class="brand-name">InsureHub</h2>
+      <p class="brand-tagline">Your Trusted Protection Partner</p>
+
+      <div class="auth-illustration">
+        <div class="illus-circle illus-1"></div>
+        <div class="illus-circle illus-2"></div>
+        <div class="illus-circle illus-3"></div>
+        <div class="illus-house">🏠</div>
+      </div>
+
+      <div class="trust-points">
+        <div class="trust-point"><span class="trust-check">✓</span> 2.5M+ Protected Homes</div>
+        <div class="trust-point"><span class="trust-check">✓</span> 98% Claims Satisfaction</div>
+        <div class="trust-point"><span class="trust-check">✓</span> Licensed in All 50 States</div>
+        <div class="trust-point"><span class="trust-check">✓</span> 24/7 Expert Support</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="auth-right">
+    <div class="auth-card">
+
+      <!-- NOTICE BANNER -->
+      <div *ngIf="loginRequiredNotice" class="mb-4 p-3 bg-amber-50 border border-amber-300 text-amber-900 rounded-lg text-xs font-semibold flex items-center gap-2">
+        <span class="text-base">🔒</span> Log in or register an account to access the Homeowners Insurance portal.
+      </div>
+
+      <!-- TAB SWITCHER -->
+      <div class="tab-switcher" role="tablist">
+        <button
+          class="tab-btn"
+          [class.tab-active]="activeTab === 'login'"
+          id="tab-login"
+          role="tab"
+          (click)="setTab('login')">
+          Login
+        </button>
+        <button
+          class="tab-btn"
+          [class.tab-active]="activeTab === 'register-user'"
+          id="tab-register-user"
+          role="tab"
+          (click)="setTab('register-user')">
+          Register as User
+        </button>
+        <button
+          class="tab-btn"
+          [class.tab-active]="activeTab === 'register-surveyor'"
+          id="tab-register-surveyor"
+          role="tab"
+          (click)="setTab('register-surveyor')">
+          Register as Surveyor
+        </button>
+      </div>
+
+      <!-- ===== LOGIN FORM ===== -->
+      @if (activeTab === 'login') {
+        <div class="form-panel" id="login-panel">
+          <div class="form-header">
+            <h2>Welcome Back</h2>
+            <p>Sign in to access your InsureHub account</p>
+          </div>
+
+          <form (ngSubmit)="onLogin()" class="auth-form">
+            <div class="form-group">
+              <label for="login-email">Email Address</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📧</span>
+                <input type="email" id="login-email" placeholder="you@example.com"
+                  [(ngModel)]="loginForm.email" name="email" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="login-password">Password</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🔒</span>
+                <input [type]="showPassword ? 'text' : 'password'" id="login-password"
+                  placeholder="Enter your password"
+                  [(ngModel)]="loginForm.password" name="password" required />
+                <button type="button" class="toggle-pwd" (click)="showPassword = !showPassword">
+                  {{ showPassword ? '🙈' : '👁️' }}
+                </button>
+              </div>
+            </div>
+
+            <div class="form-row-split">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="loginForm.rememberMe" name="rememberMe" />
+                Remember me
+              </label>
+              <a class="forgot-link" href="#">Forgot password?</a>
+            </div>
+
+            <div class="form-tip">
+              <span>💡</span>
+              <em>Use email with "surveyor" (e.g. john&#64;surveyor.com) to log in as surveyor</em>
+            </div>
+
+            <button type="submit" class="btn-submit" id="login-submit-btn">
+              Sign In →
+            </button>
+
+            <div class="divider"><span>or continue with</span></div>
+
+            <div class="social-logins">
+              <button type="button" class="social-btn" id="google-login-btn">
+                <span>G</span> Google
+              </button>
+              <button type="button" class="social-btn" id="fb-login-btn">
+                <span>f</span> Facebook
+              </button>
+            </div>
+          </form>
+        </div>
+      }
+
+      <!-- ===== REGISTER USER FORM ===== -->
+      @if (activeTab === 'register-user') {
+        <div class="form-panel" id="register-user-panel">
+          <div class="form-header">
+            <h2>Create Your Account</h2>
+            <p>Get protected in minutes — start your homeowners insurance journey</p>
+          </div>
+
+          <form (ngSubmit)="onRegisterUser()" class="auth-form scrollable-form">
+            <div class="form-section-label">Personal Information</div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="ru-firstname">First Name</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">👤</span>
+                  <input type="text" id="ru-firstname" placeholder="John"
+                    [(ngModel)]="registerUserForm.firstName" name="firstName" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="ru-lastname">Last Name</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">👤</span>
+                  <input type="text" id="ru-lastname" placeholder="Doe"
+                    [(ngModel)]="registerUserForm.lastName" name="lastName" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="ru-email">Email Address</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">📧</span>
+                  <input type="email" id="ru-email" placeholder="you@example.com"
+                    [(ngModel)]="registerUserForm.email" name="email" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="ru-phone">Phone Number</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">📱</span>
+                  <input type="tel" id="ru-phone" placeholder="+1 (555) 000-0000"
+                    [(ngModel)]="registerUserForm.phone" name="phone" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="ru-dob">Date of Birth</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🎂</span>
+                <input type="date" id="ru-dob"
+                  [(ngModel)]="registerUserForm.dob" name="dob" required />
+              </div>
+            </div>
+
+            <div class="form-section-label">Address</div>
+            <div class="form-group">
+              <label for="ru-address">Street Address</label>
+              <div class="input-wrapper">
+                <span class="input-icon">🏠</span>
+                <input type="text" id="ru-address" placeholder="123 Main St"
+                  [(ngModel)]="registerUserForm.address" name="address" required />
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label for="ru-city">City</label>
+                <input class="plain-input" type="text" id="ru-city" placeholder="City"
+                  [(ngModel)]="registerUserForm.city" name="city" required />
+              </div>
+              <div class="form-group">
+                <label for="ru-state">State</label>
+                <select class="plain-input" id="ru-state"
+                  [(ngModel)]="registerUserForm.state" name="state" required>
+                  <option value="">Select</option>
+                  @for (s of states; track s) {
+                    <option [value]="s">{{ s }}</option>
+                  }
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ru-zip">ZIP Code</label>
+                <input class="plain-input" type="text" id="ru-zip" placeholder="00000"
+                  [(ngModel)]="registerUserForm.zip" name="zip" required />
+              </div>
+            </div>
+
+            <div class="form-section-label">Security</div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="ru-password">Password</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🔒</span>
+                  <input [type]="showPassword ? 'text' : 'password'" id="ru-password"
+                    placeholder="Min. 8 characters"
+                    [(ngModel)]="registerUserForm.password" name="password" required />
+                  <button type="button" class="toggle-pwd" (click)="showPassword = !showPassword">
+                    {{ showPassword ? '🙈' : '👁️' }}
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="ru-confirm">Confirm Password</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🔒</span>
+                  <input [type]="showConfirmPassword ? 'text' : 'password'" id="ru-confirm"
+                    placeholder="Repeat password"
+                    [(ngModel)]="registerUserForm.confirmPassword" name="confirmPassword" required />
+                  <button type="button" class="toggle-pwd" (click)="showConfirmPassword = !showConfirmPassword">
+                    {{ showConfirmPassword ? '🙈' : '👁️' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <label class="checkbox-label mt-2">
+              <input type="checkbox" [(ngModel)]="registerUserForm.agreeTerms" name="agreeTerms" required />
+              I agree to InsureHub's <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+            </label>
+
+            <button type="submit" class="btn-submit" id="register-user-submit-btn">
+              Create Account →
+            </button>
+          </form>
+        </div>
+      }
+
+      <!-- ===== REGISTER SURVEYOR FORM ===== -->
+      @if (activeTab === 'register-surveyor') {
+        <div class="form-panel" id="register-surveyor-panel">
+          <div class="form-header">
+            <h2>Join as a Surveyor</h2>
+            <p>Apply to become a certified InsureHub property surveyor</p>
+          </div>
+
+          <form (ngSubmit)="onRegisterSurveyor()" class="auth-form scrollable-form">
+            <div class="form-section-label">Personal Details</div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="rs-firstname">First Name</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">👤</span>
+                  <input type="text" id="rs-firstname" placeholder="Jane"
+                    [(ngModel)]="registerSurveyorForm.firstName" name="firstName" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="rs-lastname">Last Name</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">👤</span>
+                  <input type="text" id="rs-lastname" placeholder="Smith"
+                    [(ngModel)]="registerSurveyorForm.lastName" name="lastName" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="rs-email">Email Address</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">📧</span>
+                  <input type="email" id="rs-email" placeholder="jane@surveyor.com"
+                    [(ngModel)]="registerSurveyorForm.email" name="email" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="rs-phone">Phone Number</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">📱</span>
+                  <input type="tel" id="rs-phone" placeholder="+1 (555) 000-0000"
+                    [(ngModel)]="registerSurveyorForm.phone" name="phone" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section-label">Professional Credentials</div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="rs-license">License Number</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🪪</span>
+                  <input type="text" id="rs-license" placeholder="e.g. TX-2024-00123"
+                    [(ngModel)]="registerSurveyorForm.licenseNumber" name="licenseNumber" required />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="rs-years">Years of Experience</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">📅</span>
+                  <input type="number" id="rs-years" min="0" max="60" placeholder="e.g. 5"
+                    [(ngModel)]="registerSurveyorForm.yearsExperience" name="yearsExperience" required />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="rs-cert">Certification Body</label>
+              <select class="plain-input" id="rs-cert"
+                [(ngModel)]="registerSurveyorForm.certificationBody" name="certificationBody" required>
+                <option value="">Select Certification Body</option>
+                @for (c of certificationBodies; track c) {
+                  <option [value]="c">{{ c }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="rs-spec">Specialization</label>
+              <select class="plain-input" id="rs-spec"
+                [(ngModel)]="registerSurveyorForm.specialization" name="specialization" required>
+                <option value="">Select Specialization</option>
+                @for (s of specializations; track s) {
+                  <option [value]="s">{{ s }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="form-section-label">Location</div>
+            <div class="form-group">
+              <label for="rs-address">Business / Street Address</label>
+              <div class="input-wrapper">
+                <span class="input-icon">📍</span>
+                <input type="text" id="rs-address" placeholder="456 Oak Ave"
+                  [(ngModel)]="registerSurveyorForm.address" name="address" required />
+              </div>
+            </div>
+
+            <div class="form-row-3">
+              <div class="form-group">
+                <label for="rs-city">City</label>
+                <input class="plain-input" type="text" id="rs-city" placeholder="City"
+                  [(ngModel)]="registerSurveyorForm.city" name="city" required />
+              </div>
+              <div class="form-group">
+                <label for="rs-state">State</label>
+                <select class="plain-input" id="rs-state"
+                  [(ngModel)]="registerSurveyorForm.state" name="state" required>
+                  <option value="">State</option>
+                  @for (s of states; track s) {
+                    <option [value]="s">{{ s }}</option>
+                  }
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="rs-zip">ZIP Code</label>
+                <input class="plain-input" type="text" id="rs-zip" placeholder="00000"
+                  [(ngModel)]="registerSurveyorForm.zip" name="zip" required />
+              </div>
+            </div>
+
+            <div class="form-section-label">Account Security</div>
+            <div class="form-row-2">
+              <div class="form-group">
+                <label for="rs-password">Password</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🔒</span>
+                  <input [type]="showPassword ? 'text' : 'password'" id="rs-password"
+                    placeholder="Min. 8 characters"
+                    [(ngModel)]="registerSurveyorForm.password" name="password" required />
+                  <button type="button" class="toggle-pwd" (click)="showPassword = !showPassword">
+                    {{ showPassword ? '🙈' : '👁️' }}
+                  </button>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="rs-confirm">Confirm Password</label>
+                <div class="input-wrapper">
+                  <span class="input-icon">🔒</span>
+                  <input [type]="showConfirmPassword ? 'text' : 'password'" id="rs-confirm"
+                    placeholder="Repeat password"
+                    [(ngModel)]="registerSurveyorForm.confirmPassword" name="confirmPassword" required />
+                  <button type="button" class="toggle-pwd" (click)="showConfirmPassword = !showConfirmPassword">
+                    {{ showConfirmPassword ? '🙈' : '👁️' }}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="surveyor-note">
+              <span>ℹ️</span>
+              <p>Your application will be reviewed by InsureHub admin. You'll receive email confirmation within 2–3 business days.</p>
+            </div>
+
+            <label class="checkbox-label mt-2">
+              <input type="checkbox" [(ngModel)]="registerSurveyorForm.agreeTerms" name="agreeTerms" required />
+              I agree to InsureHub's <a href="#" class="terms-link">Terms of Service</a>, <a href="#" class="terms-link">Privacy Policy</a> and <a href="#" class="terms-link">Surveyor Code of Conduct</a>
+            </label>
+
+            <button type="submit" class="btn-submit btn-surveyor" id="register-surveyor-submit-btn">
+              Submit Application →
+            </button>
+          </form>
+        </div>
+      }
+
+    </div>
+  </div>
+</div>

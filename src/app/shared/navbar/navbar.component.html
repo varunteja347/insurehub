@@ -1,0 +1,163 @@
+<!-- TOP UTILITY STRIP -->
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="top-links-left">
+      <a href="javascript:void(0)" class="top-link">Español</a>
+      <a href="javascript:void(0)" class="top-link">Insights Center</a>
+      <a href="javascript:void(0)" class="top-link">Find an Agent</a>
+      <a href="javascript:void(0)" class="top-link">Claims</a>
+      <a href="javascript:void(0)" class="top-link">Contact Us</a>
+    </div>
+
+    <div class="top-links-right">
+      <a href="javascript:void(0)" class="top-link font-medium">Agents & Producers</a>
+      
+      <!-- MY ACCOUNT WITH SEPARATE DROPDOWN OPTIONS -->
+      <div 
+        class="account-dropdown-wrapper"
+        (mouseenter)="toggleAccountMenu(true)"
+        (mouseleave)="toggleAccountMenu(false)"
+      >
+        <button class="my-account-btn" (click)="toggleAccountMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+          My Account
+        </button>
+
+        <!-- ACCOUNT DROPDOWN MENU -->
+        <div class="account-menu" [class.open]="showAccountMenu">
+          <div class="menu-header" *ngIf="!authService.isLoggedIn()">
+            <span class="menu-title">Account Access</span>
+            <span class="menu-subtitle">Select an option to proceed</span>
+          </div>
+
+          <div class="menu-header" *ngIf="authService.isLoggedIn()">
+            <span class="menu-title">Active Session</span>
+            <span class="menu-subtitle">Logged in to InsureHub</span>
+          </div>
+
+          <div class="menu-items" *ngIf="!authService.isLoggedIn()">
+            <a (click)="goToAuth('login')" class="menu-item">
+              <span class="item-icon">🔑</span>
+              <div>
+                <div class="item-title">Login</div>
+                <div class="item-desc">Access existing account</div>
+              </div>
+            </a>
+
+            <a (click)="goToAuth('register-user')" class="menu-item">
+              <span class="item-icon">👤</span>
+              <div>
+                <div class="item-title">Register as User</div>
+                <div class="item-desc">Create homeowner account</div>
+              </div>
+            </a>
+
+            <a (click)="goToAuth('register-surveyor')" class="menu-item">
+              <span class="item-icon">📋</span>
+              <div>
+                <div class="item-title">Register as Surveyor</div>
+                <div class="item-desc">Inspector portal signup</div>
+              </div>
+            </a>
+          </div>
+
+          <div class="menu-items" *ngIf="authService.isLoggedIn()">
+            <a (click)="onLinkClick({text: 'Homeowners Insurance', route: '/user-home'})" class="menu-item">
+              <span class="item-icon">🏠</span>
+              <div>
+                <div class="item-title">My Dashboard</div>
+                <div class="item-desc">Policy & claims overview</div>
+              </div>
+            </a>
+
+            <a (click)="logout()" class="menu-item text-red-600">
+              <span class="item-icon">🚪</span>
+              <div>
+                <div class="item-title text-red-700">Sign Out</div>
+                <div class="item-desc">End session securely</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN STICKY NAVIGATION HEADER -->
+<header class="main-header" [class.scrolled]="scrolled">
+  <div class="header-inner">
+    <!-- Logo -->
+    <div class="brand-logo" (click)="goToLanding()">
+      <div class="logo-icon-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <span class="brand-name">InsureHub</span>
+        <span class="brand-tagline">Trusted Protection Partner</span>
+      </div>
+    </div>
+
+    <!-- NAV MENU (5 Options, clean typography without arrows) -->
+    <nav class="nav-menu">
+      <div 
+        *ngFor="let item of navItems" 
+        class="nav-item-wrapper"
+        (mouseenter)="setActiveNav(item.label)"
+        (mouseleave)="setActiveNav(null)"
+      >
+        <button 
+          class="nav-item-btn" 
+          [class.active]="activeNav === item.label || (item.label === 'Home' && activeTab === 'home')"
+        >
+          {{ item.label }}
+        </button>
+
+        <!-- MEGA DROPDOWN -->
+        <div class="mega-dropdown" [class.open]="activeNav === item.label">
+          <div class="dropdown-content">
+            <div class="dropdown-cols">
+              <div *ngFor="let col of item.columns" class="dropdown-col">
+                <h4 class="col-heading">{{ col.heading }}</h4>
+                <ul class="col-links">
+                  <li *ngFor="let link of col.links">
+                    <a 
+                      (click)="onLinkClick(link)"
+                      class="col-link-item"
+                      [class.highlight-active]="link.active"
+                    >
+                      <span class="link-bullet" *ngIf="link.active">•</span>
+                      {{ link.text }}
+                      <span *ngIf="link.active" class="active-pill">Login Required</span>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Image/Feature Card in Dropdown -->
+            <div *ngIf="item.image" class="dropdown-feature">
+              <img [src]="item.image.src" [alt]="item.label" class="feature-img" />
+              <p class="feature-caption">{{ item.image.caption }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- RIGHT CONTROLS: Clean Input (No Magnifying Glass Emoji) & Auth Buttons -->
+    <div class="header-actions">
+      <div class="search-box">
+        <input type="text" placeholder="Help me find..." class="search-input" />
+      </div>
+
+      <button (click)="goToAuth('login')" class="btn-primary login-btn">
+        Login / Register
+      </button>
+    </div>
+  </div>
+</header>

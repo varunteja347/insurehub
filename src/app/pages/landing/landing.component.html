@@ -1,0 +1,225 @@
+<!-- SHARED NAVIGATION HEADER -->
+<app-navbar></app-navbar>
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-container">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="pulse-dot"></span>
+        Trusted by 2.5M+ Homeowners & Businesses Across America
+      </div>
+      
+      <h1 class="hero-title">
+        Protection You Can <span class="highlight-gold">Truly Trust.</span>
+      </h1>
+      
+      <p class="hero-sub">
+        Comprehensive coverage tailored for your home, vehicle, business, and family. Get an instant personalized quote in less than 2 minutes.
+      </p>
+
+      <!-- ZIP CODE QUOTE FORM -->
+      <div class="quote-form-card">
+        <div class="quote-type-selector">
+          <button class="type-btn active">🏠 Home</button>
+          <button class="type-btn">🚗 Auto</button>
+          <button class="type-btn">🏢 Business</button>
+        </div>
+
+        <div class="quote-input-group">
+          <input type="text" placeholder="Enter ZIP Code (e.g. 78701)" class="zip-input" />
+          <button (click)="goToUserHome()" class="btn-primary quote-btn">
+            Get My Free Quote &rarr;
+          </button>
+        </div>
+        <p class="quote-disclaimer">🔒 No spam. Instant policy estimates. 100% Secure.</p>
+      </div>
+    </div>
+
+    <!-- HERO IMAGE CARD -->
+    <div class="hero-media">
+      <div class="glass-image-wrapper">
+        <img src="assets/hero-house.png" alt="InsureHub Protection" class="hero-img" />
+        <div class="floating-badge badge-top">
+          <span class="badge-icon">🛡️</span>
+          <div>
+            <div class="font-bold text-xs text-slate-900">A+ Financial Rating</div>
+            <div class="text-3xs text-slate-500">AM Best Superior Claims Rating</div>
+          </div>
+        </div>
+        <div class="floating-badge badge-bottom">
+          <span class="badge-icon">⚡</span>
+          <div>
+            <div class="font-bold text-xs text-slate-900">30-Min Claim Response</div>
+            <div class="text-3xs text-slate-500">Fast digital payouts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STATS BAR -->
+<section class="stats-bar">
+  <div class="stats-container">
+    <div class="stat-item">
+      <span class="stat-num">99.4%</span>
+      <span class="stat-lbl">Claims Approval Rate</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">$1.4B+</span>
+      <span class="stat-lbl">Claims Paid Nationwide</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">40+ Yrs</span>
+      <span class="stat-lbl">Industry Leadership</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num">24 / 7</span>
+      <span class="stat-lbl">Dedicated Concierge</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS / COVERAGE CARDS SECTION -->
+<section class="products-section">
+  <div class="section-container">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="category-chip">Our Solutions</span>
+      <h2 class="section-heading">Comprehensive Protection For Everything You Value</h2>
+      <p class="section-sub">Choose from our tailored insurance products backed by our dedicated agent network.</p>
+    </div>
+
+    <div class="products-grid">
+      <!-- Card 1: Homeowners -->
+      <div class="product-card highlighted">
+        <div class="card-img-holder">
+          <img src="assets/hero-house.png" alt="Homeowners Insurance" class="card-img" />
+          <span class="card-tag">Most Popular</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Homeowners Insurance</h3>
+          <p class="card-desc">Complete coverage for dwelling, personal property, liability, and living expenses.</p>
+          <ul class="card-checklist">
+            <li>✓ Full replacement cost guarantee</li>
+            <li>✓ Flood & storm damage riders available</li>
+            <li>✓ 24/7 emergency response team</li>
+          </ul>
+          <button (click)="goToUserHome()" class="btn-primary w-full mt-4">
+            Explore Homeowners Policy &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 2: Auto -->
+      <div class="product-card">
+        <div class="card-img-holder">
+          <img src="assets/auto-car.png" alt="Auto Insurance" class="card-img" />
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Auto & Vehicle Insurance</h3>
+          <p class="card-desc">Reliable collision, comprehensive, and roadside assistance for your vehicles.</p>
+          <ul class="card-checklist">
+            <li>✓ Accident forgiveness benefit</li>
+            <li>✓ EV battery & charger coverage</li>
+            <li>✓ Multi-vehicle bundle discounts</li>
+          </ul>
+          <button (click)="goToAuth()" class="btn-outline w-full mt-4">
+            Get Auto Quote
+          </button>
+        </div>
+      </div>
+
+      <!-- Card 3: Business & Family -->
+      <div class="product-card">
+        <div class="card-img-holder">
+          <img src="assets/family-home.png" alt="Family & Business Protection" class="card-img" />
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Business & Umbrella Insurance</h3>
+          <p class="card-desc">Protect your commercial assets, employees, and liability against unexpected risks.</p>
+          <ul class="card-checklist">
+            <li>✓ Business Owners Policy (BOP)</li>
+            <li>✓ Commercial property & liability</li>
+            <li>✓ Group benefits & life insurance</li>
+          </ul>
+          <button (click)="goToAuth()" class="btn-outline w-full mt-4">
+            Explore Business Plans
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS SECTION -->
+<section class="testimonials-section">
+  <div class="section-container">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="category-chip">Client Testimonials</span>
+      <h2 class="section-heading">Why Millions Trust InsureHub</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <div *ngFor="let t of testimonials" class="testimonial-card">
+        <div class="stars font-bold">★★★★★</div>
+        <p class="testimonial-text">"{{ t.text }}"</p>
+        <div class="testimonial-author">
+          <div>
+            <div class="author-name">{{ t.name }}</div>
+            <div class="author-loc">{{ t.location }} &bull; Verified Policyholder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="main-footer">
+  <div class="footer-container">
+    <div class="footer-grid">
+      <div class="footer-brand-col">
+        <div class="flex items-center gap-2 mb-3">
+          <span class="text-2xl">🛡️</span>
+          <span class="text-xl font-bold text-white font-display">InsureHub</span>
+        </div>
+        <p class="text-xs leading-relaxed mb-4" style="color: #bfdbfe;">
+          InsureHub Financial &amp; Property Protection Services. Providing dependable insurance for homeowners, vehicles, and businesses nationwide.
+        </p>
+        <p class="text-xs" style="color: #93c5fd;">&copy; 2026 InsureHub Inc. All rights reserved.</p>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Insurance Products</h4>
+        <ul class="footer-links">
+          <li><a (click)="goToUserHome()">Homeowners Insurance</a></li>
+          <li><a (click)="goToAuth()">Auto Insurance</a></li>
+          <li><a (click)="goToAuth()">Business Protection</a></li>
+          <li><a (click)="goToAuth()">Employee Benefits</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Quick Portals</h4>
+        <ul class="footer-links">
+          <li><a (click)="goToAuth()">User Portal</a></li>
+          <li><a (click)="goToAuth()">Surveyor Registration</a></li>
+          <li><a (click)="goToUserHome()">File a Claim</a></li>
+          <li><a (click)="goToAuth()">Agent Directory</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Need Assistance?</h4>
+        <p class="text-xs mb-2" style="color: #bfdbfe;">24/7 Dedicated Support Hotline:</p>
+        <p class="text-lg font-bold font-mono mb-4" style="color: #fbbf24;">1-800-555-HUB1</p>
+        <button (click)="goToAuth()" class="btn-primary text-xs py-2 w-full">Sign In to Account</button>
+      </div>
+    </div>
+  </div>
+</footer>

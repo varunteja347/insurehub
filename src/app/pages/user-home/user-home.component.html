@@ -1,0 +1,344 @@
+<!-- SHARED NAVIGATION HEADER (Same as Landing Page) -->
+<app-navbar [activeTab]="'home'"></app-navbar>
+
+<!-- USER DASHBOARD SUB-HEADER STRIP -->
+<div class="dash-substrip">
+  <div class="dash-container">
+    <div class="user-greeting">
+      <div class="user-avatar">JD</div>
+      <div>
+        <h2 class="greeting-title">Welcome back, {{ userName }}</h2>
+        <p class="greeting-sub">Homeowners Policy #POL-2024-001847 &bull; Active Coverage</p>
+      </div>
+    </div>
+    
+    <!-- DASHBOARD SUB-TABS -->
+    <div class="dash-tabs">
+      <button 
+        class="dash-tab-btn" 
+        [class.active]="activeSection === 'home'" 
+        (click)="setSection('home')"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+        Overview
+      </button>
+      <button 
+        class="dash-tab-btn" 
+        [class.active]="activeSection === 'policy'" 
+        (click)="setSection('policy')"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        My Policies
+      </button>
+      <button 
+        class="dash-tab-btn" 
+        [class.active]="activeSection === 'claims'" 
+        (click)="setSection('claims')"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        Claims & History
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN CONTENT AREA -->
+<main class="dash-main">
+  <div class="dash-container">
+
+    <!-- ================= SECTION 1: OVERVIEW ================= -->
+    <div *ngIf="activeSection === 'home'" class="space-y-8">
+      
+      <!-- HERO PROPERTY FEATURE BANNER -->
+      <div class="property-hero-card">
+        <div class="property-img-col">
+          <img src="assets/hero-house.png" alt="Insured Property" class="property-img" />
+          <div class="protection-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            100% Protected Property
+          </div>
+        </div>
+
+        <div class="property-info-col">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="badge-active">Active Policy</span>
+            <span class="text-xs text-slate-400 font-mono">ID: POL-2024-001847</span>
+          </div>
+
+          <h1 class="property-address">123 Maple Street</h1>
+          <p class="property-sub">Austin, TX 78701 &bull; Single Family Residence (2,850 sq ft)</p>
+
+          <div class="property-stats-grid">
+            <div class="stat-box">
+              <span class="stat-lbl">Total Coverage</span>
+              <span class="stat-val">$450,000</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-lbl">Monthly Premium</span>
+              <span class="stat-val">$142<span class="text-xs text-slate-400">/mo</span></span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-lbl">Deductible</span>
+              <span class="stat-val">$1,000</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-lbl">Renewal Date</span>
+              <span class="stat-val text-amber-600">Dec 15, 2025</span>
+            </div>
+          </div>
+
+          <div class="property-actions">
+            <button class="btn-primary" (click)="handleQuickAction('claim')">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              File a Claim
+            </button>
+            <button class="btn-outline" (click)="setSection('policy')">
+              View Detailed Policy
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- QUICK ACTIONS GRID -->
+      <section>
+        <h3 class="section-title">Quick Policy Services</h3>
+        <div class="quick-actions-grid">
+          <div 
+            *ngFor="let act of quickActions" 
+            class="action-card"
+            (click)="handleQuickAction(act.action)"
+          >
+            <div class="action-icon">{{ act.icon }}</div>
+            <span class="action-label">{{ act.label }}</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- COVERAGE BREAKDOWN GRID -->
+      <section>
+        <div class="flex justify-between items-center mb-4">
+          <div>
+            <h3 class="section-title">Homeowners Coverage Breakdown</h3>
+            <p class="section-desc">Comprehensive limits and protection guarantees for your property</p>
+          </div>
+          <button class="text-sm font-semibold text-crimson hover:underline" (click)="setSection('policy')">
+            Manage Coverage &rarr;
+          </button>
+        </div>
+
+        <div class="coverage-grid">
+          <div *ngFor="let item of coverageItems" class="coverage-card">
+            <div class="coverage-header">
+              <span class="coverage-icon">{{ item.icon }}</span>
+              <span class="coverage-amount">{{ item.amount }}</span>
+            </div>
+            <h4 class="coverage-label">{{ item.label }}</h4>
+            <p class="coverage-detail">{{ item.detail }}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RECENT CLAIMS & AGENT ADVISOR CARD -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Recent Claims Preview -->
+        <div class="lg:col-span-2 pro-card p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-lg text-slate-900">Recent Claims Activity</h3>
+            <button (click)="setSection('claims')" class="text-sm font-semibold text-crimson hover:underline">View All Claims</button>
+          </div>
+
+          <div class="space-y-3">
+            <div *ngFor="let clm of claims.slice(0, 2)" class="claim-item-row">
+              <div class="claim-icon-box font-bold">
+                CLM
+              </div>
+              <div class="flex-1">
+                <div class="flex justify-between items-center">
+                  <h4 class="font-semibold text-slate-800">{{ clm.type }}</h4>
+                  <span class="status-pill" [ngClass]="getStatusClass(clm.status)">{{ clm.status }}</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">{{ clm.description }}</p>
+                <div class="flex gap-4 mt-2 text-xs text-slate-400">
+                  <span>Filed: {{ clm.date }}</span>
+                  <span>Estimated: {{ clm.amount }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dedicated Agent Card -->
+        <div class="pro-card p-6 flex flex-col justify-between bg-gradient-to-br from-slate-900 to-slate-800 text-white">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Your Dedicated Agent</span>
+            <div class="flex items-center gap-4 mt-4">
+              <div class="w-14 h-14 rounded-full bg-slate-700 border-2 border-amber-400 overflow-hidden flex items-center justify-center font-bold text-lg">
+                MS
+              </div>
+              <div>
+                <h4 class="font-bold text-lg text-white">Michael Smith</h4>
+                <p class="text-xs text-slate-300">Senior Home Insurance Specialist</p>
+                <p class="text-xs text-amber-400 mt-1">★ 4.98 (240 reviews)</p>
+              </div>
+            </div>
+            <p class="text-xs text-slate-300 mt-4 leading-relaxed">
+              Have questions about your coverage limits or endorsement options? Call or email Michael directly for priority assistance.
+            </p>
+          </div>
+
+          <div class="mt-6 flex gap-2">
+            <button class="btn-primary w-full text-xs py-2" (click)="showClaimModal = true">
+              📞 Call Agent
+            </button>
+            <button class="btn-outline border-white text-white hover:bg-white hover:text-slate-900 w-full text-xs py-2" (click)="showClaimModal = true">
+              ✉️ Email
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ================= SECTION 2: POLICIES ================= -->
+    <div *ngIf="activeSection === 'policy'" class="space-y-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Your Active Policies</h2>
+          <p class="text-slate-600 text-sm">Review full policy schedules, premium payments, and rider add-ons</p>
+        </div>
+        <button class="btn-primary" (click)="showClaimModal = true">+ Add Property / Policy</button>
+      </div>
+
+      <div class="space-y-4">
+        <div *ngFor="let pol of policies" class="pro-card p-6">
+          <div class="flex flex-col md:flex-row justify-between md:items-center gap-4 border-b border-slate-100 pb-4 mb-4">
+            <div>
+              <div class="flex items-center gap-3">
+                <span class="font-mono text-sm font-bold text-slate-500">{{ pol.id }}</span>
+                <span class="status-pill status-active">{{ pol.status }}</span>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 mt-1">{{ pol.type }}</h3>
+              <p class="text-sm text-slate-600">📍 {{ pol.property }}</p>
+            </div>
+            <div class="text-right">
+              <span class="text-2xl font-extrabold text-slate-900">{{ pol.premium }}</span>
+              <p class="text-xs text-slate-500">Renews {{ pol.expires }}</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+            <div>
+              <span class="text-slate-500 text-xs block">Dwelling Limit</span>
+              <span class="font-bold text-slate-800">{{ pol.coverage }}</span>
+            </div>
+            <div>
+              <span class="text-slate-500 text-xs block">Deductible</span>
+              <span class="font-bold text-slate-800">$1,000 Standard</span>
+            </div>
+            <div>
+              <span class="text-slate-500 text-xs block">Payment Method</span>
+              <span class="font-bold text-slate-800">Auto-Pay (Visa **4921)</span>
+            </div>
+            <div class="flex gap-2 justify-end items-center">
+              <button class="btn-outline text-xs py-1.5 px-3" (click)="showClaimModal = true">Download PDF</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= SECTION 3: CLAIMS ================= -->
+    <div *ngIf="activeSection === 'claims'" class="space-y-6">
+      <div class="flex justify-between items-center">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Claims History & Tracking</h2>
+          <p class="text-slate-600 text-sm">Monitor live claim progress, upload receipts, and view surveyor notes</p>
+        </div>
+        <button class="btn-primary" (click)="handleQuickAction('claim')">+ File New Claim</button>
+      </div>
+
+      <div class="pro-card overflow-hidden">
+        <table class="w-full text-left text-sm border-collapse">
+          <thead>
+            <tr class="bg-slate-100 text-slate-700 font-bold border-b border-slate-200">
+              <th class="p-4">Claim ID</th>
+              <th class="p-4">Incident Type</th>
+              <th class="p-4">Date Filed</th>
+              <th class="p-4">Est. Amount</th>
+              <th class="p-4">Status</th>
+              <th class="p-4 text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            <tr *ngFor="let clm of claims" class="hover:bg-slate-50 transition">
+              <td class="p-4 font-mono font-bold text-slate-700">{{ clm.id }}</td>
+              <td class="p-4 font-semibold text-slate-900">{{ clm.type }}</td>
+              <td class="p-4 text-slate-600">{{ clm.date }}</td>
+              <td class="p-4 font-bold text-slate-800">{{ clm.amount }}</td>
+              <td class="p-4">
+                <span class="status-pill" [ngClass]="getStatusClass(clm.status)">{{ clm.status }}</span>
+              </td>
+              <td class="p-4 text-right">
+                <button class="text-xs font-bold text-crimson hover:underline" (click)="showClaimModal = true">View Details</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- CLAIM / SERVICE ACTION MODAL -->
+<div *ngIf="showClaimModal" class="modal-backdrop" (click)="closeModal()">
+  <div class="modal-card" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h3 class="text-xl font-bold text-slate-900">InsureHub Service Center</h3>
+      <button (click)="closeModal()" class="close-btn">&times;</button>
+    </div>
+    
+    <div class="modal-body">
+      <p class="text-sm text-slate-600 mb-4">
+        Submit a request or claim report. Our 24/7 emergency team will respond within 30 minutes.
+      </p>
+
+      <div class="space-y-4">
+        <div>
+          <label class="modal-label">Select Service Type</label>
+          <select class="modal-input">
+            <option>File Property Damage Claim</option>
+            <option>Schedule Surveyor Inspection</option>
+            <option>Request Policy Coverage Increase</option>
+            <option>Contact Agent / General Question</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="modal-label">Description of Incident / Request</label>
+          <textarea rows="4" placeholder="Provide details regarding the property damage or question..." class="modal-input"></textarea>
+        </div>
+
+        <div>
+          <label class="modal-label">Upload Documentation / Photos</label>
+          <input type="file" class="block w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-slate-100 file:text-slate-700 hover:file:bg-slate-200" />
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn-outline text-sm" (click)="closeModal()">Cancel</button>
+      <button class="btn-primary text-sm" (click)="closeModal()">Submit Request</button>
+    </div>
+  </div>
+</div>

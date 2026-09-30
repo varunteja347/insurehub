@@ -1,0 +1,298 @@
+/* ============================
+   SURVEYOR PAGE
+   ============================ */
+.surveyor-page {
+  min-height: 100vh;
+  background: #f0f4f8;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Header */
+.surveyor-header {
+  background: linear-gradient(135deg, #1a0a12, #3d1020);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+}
+.header-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.logo span { color: #c8a951; }
+.logout-btn {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 0.5rem 1.25rem;
+  border-radius: 50px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.logout-btn:hover {
+  background: rgba(255,255,255,0.22);
+}
+
+/* Main */
+.surveyor-main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+/* Status Hero */
+.status-hero {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.status-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  height: 120px;
+}
+.status-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid;
+  animation: ringPulse 3s ease-in-out infinite;
+}
+.ring-1 {
+  width: 100px; height: 100px;
+  border-color: rgba(200,169,81,0.4);
+  animation-delay: 0s;
+}
+.ring-2 {
+  width: 130px; height: 130px;
+  border-color: rgba(200,169,81,0.2);
+  animation-delay: 0.5s;
+}
+.ring-3 {
+  width: 160px; height: 160px;
+  border-color: rgba(200,169,81,0.1);
+  animation-delay: 1s;
+}
+@keyframes ringPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.7; }
+}
+.status-icon {
+  font-size: 3.5rem;
+  position: relative;
+  z-index: 1;
+  animation: iconFloat 3s ease-in-out infinite;
+}
+@keyframes iconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.status-title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 0.75rem;
+}
+.status-subtitle {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.app-id-badge {
+  display: inline-block;
+  background: #f5f0eb;
+  border: 1px solid #e0d0d8;
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  font-size: 0.82rem;
+  color: #555;
+}
+
+/* Progress Steps */
+.progress-section {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.progress-section h2, .faq-section h2, .contact-section h2 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 1.5rem;
+}
+.steps-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 0;
+  border-left: 2px solid #eee;
+  margin-left: 1.25rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+.step:first-child { padding-top: 0; }
+.step:last-child { border-left: 2px solid transparent; }
+.step-connector {
+  display: none;
+}
+.step-circle {
+  position: absolute;
+  left: -1.375rem;
+  top: 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  background: #eee;
+  color: #aaa;
+  border: 3px solid white;
+  flex-shrink: 0;
+}
+.step.step-done .step-circle {
+  background: #22c55e;
+  color: white;
+}
+.step.step-active .step-circle {
+  background: #c8a951;
+  color: white;
+  animation: pulseDot 2s ease-in-out infinite;
+  border-color: #fdf8ec;
+}
+@keyframes pulseDot {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(200,169,81,0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(200,169,81,0); }
+}
+.step-content {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 0.4rem;
+}
+.step-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+.step-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 50px;
+}
+.step-tag.done { background: #dcfce7; color: #166534; }
+.step-tag.active { background: #fef9c3; color: #854d0e; }
+.step-tag.pending { background: #f1f5f9; color: #64748b; }
+
+/* Info Cards */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+.info-card {
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.info-blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+.info-amber { background: #fffbeb; border: 1px solid #fde68a; }
+.info-green { background: #f0fdf4; border: 1px solid #bbf7d0; }
+.info-card-icon { font-size: 1.8rem; flex-shrink: 0; }
+.info-card h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.4rem; color: #1a1a1a; }
+.info-card p { font-size: 0.82rem; color: #555; line-height: 1.5; }
+
+/* FAQ */
+.faq-section {
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+}
+.faq-list { display: flex; flex-direction: column; gap: 0; }
+.faq-item {
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.faq-item:last-child { border-bottom: none; }
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+.faq-item:hover .faq-question { background: #fafafa; }
+.faq-item.expanded .faq-question { color: #7c1d3c; background: #fdf0f5; }
+.faq-chevron { font-size: 0.7rem; color: #888; }
+.faq-answer {
+  padding: 0 1rem 1rem;
+  font-size: 0.85rem;
+  color: #666;
+  line-height: 1.6;
+  background: #fdf0f5;
+  animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+/* Contact */
+.contact-section {
+  background: linear-gradient(135deg, #7c1d3c, #3d1020);
+  border-radius: 20px;
+  padding: 2rem;
+  color: white;
+}
+.contact-section h2 { color: white; margin-bottom: 0.5rem; }
+.contact-section > p { color: rgba(255,255,255,0.75); font-size: 0.9rem; margin-bottom: 1.5rem; }
+.contact-options { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255,255,255,0.1);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+}

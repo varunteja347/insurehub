@@ -1,0 +1,112 @@
+<div class="surveyor-page">
+  <!-- Header -->
+  <header class="surveyor-header">
+    <div class="header-inner">
+      <div class="logo" (click)="goToLanding()">🛡️ <span>InsureHub</span></div>
+      <button class="logout-btn" id="surveyor-logout-btn" (click)="logout()">Sign Out</button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="surveyor-main">
+    <!-- Status Card -->
+    <div class="status-hero">
+      <div class="status-icon-wrap">
+        <div class="status-ring ring-1"></div>
+        <div class="status-ring ring-2"></div>
+        <div class="status-ring ring-3"></div>
+        <div class="status-icon">⏳</div>
+      </div>
+      <h1 class="status-title">Application Under Review</h1>
+      <p class="status-subtitle">
+        Thank you for applying to become an InsureHub Surveyor!<br />
+        Your application is currently being reviewed by our admin team.
+      </p>
+      <div class="app-id-badge">
+        Application ID: <strong>{{ applicationId }}</strong>
+        &nbsp;|&nbsp; Submitted: <strong>{{ submittedDate }}</strong>
+      </div>
+    </div>
+
+    <!-- Progress Steps -->
+    <div class="progress-section">
+      <h2>Application Progress</h2>
+      <div class="steps-wrapper">
+        @for (step of steps; track step.label; let i = $index) {
+          <div class="step" [class.step-done]="step.done" [class.step-active]="step.active">
+            @if (i > 0) { <div class="step-connector"></div> }
+            <div class="step-circle">
+              @if (step.done) { ✓ }
+              @else { {{ step.icon }} }
+            </div>
+            <div class="step-content">
+              <span class="step-label">{{ step.label }}</span>
+              @if (step.done) { <span class="step-tag done">Complete</span> }
+              @else if (step.active) { <span class="step-tag active">In Progress</span> }
+              @else { <span class="step-tag pending">Pending</span> }
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-cards">
+      <div class="info-card info-blue">
+        <div class="info-card-icon">📧</div>
+        <div>
+          <h3>Check Your Email</h3>
+          <p>We've sent a confirmation to your registered email. Watch for updates at each review stage.</p>
+        </div>
+      </div>
+      <div class="info-card info-amber">
+        <div class="info-card-icon">📋</div>
+        <div>
+          <h3>Documents Ready</h3>
+          <p>Keep your professional license, certifications, and government-issued ID handy. We may request them.</p>
+        </div>
+      </div>
+      <div class="info-card info-green">
+        <div class="info-card-icon">⏱️</div>
+        <div>
+          <h3>Expected Timeline</h3>
+          <p>Most applications are processed within <strong>2–5 business days</strong>. Complex cases may take longer.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq-list">
+        @for (faq of faqs; track faq.q; let i = $index) {
+          <div class="faq-item" [class.expanded]="expandedFaq === i" (click)="toggleFaq(i)">
+            <div class="faq-question">
+              <span>{{ faq.q }}</span>
+              <span class="faq-chevron">{{ expandedFaq === i ? '▲' : '▼' }}</span>
+            </div>
+            @if (expandedFaq === i) {
+              <div class="faq-answer">{{ faq.a }}</div>
+            }
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="contact-section">
+      <h2>Need Help?</h2>
+      <p>Our support team is available Monday–Friday, 8AM–6PM CST.</p>
+      <div class="contact-options">
+        <div class="contact-option">
+          <span>📧</span>
+          <span>surveyor-support&#64;insurehub.com</span>
+        </div>
+        <div class="contact-option">
+          <span>📞</span>
+          <span>1-800-INSURE-HUB (1-800-467-8734)</span>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
